@@ -2,7 +2,7 @@
     <img src="assets/logo.png" width=350>
 </p>
 
-**Hawkloon** (/'hɔːkluːn/) is a framework to build syncronous workers running on scalable infrastructures.
+**Hawkloon** (/'hɔːkluːn/) is a framework to build synchronous workers running on scalable infrastructures.
 
 ### How it works
 To understand how it works, you should understand the concepts of _Worker_ and _Job_ first.

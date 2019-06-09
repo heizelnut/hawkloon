@@ -19,7 +19,7 @@ dependencies = [line for line in requirements
 setup(
     name="hawklooon",
     version="0.1.0",
-    description="Framework to build syncronous workers.",
+    description="Framework to build synchronous workers.",
     long_description=get_file_conts("../README.md"),
     long_description_content_type="text/markdown",
     url="https://github.com/heizelnut/hawkloon",
