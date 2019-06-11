@@ -71,7 +71,7 @@ worker.connect("redis://localhost:6379")
 After that, start it!
 
 ```python
-worker.start()
+worker.consume()
 ```
 
 At the end, it should look something like this:
