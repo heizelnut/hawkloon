@@ -1,5 +1,5 @@
 {
     "licenser.author": "Heizelnut (Emanuele Lillo)",
     "licenser.license": "MIT",
-    "python.pythonPath": "env/bin/python3.6"
+    "python.pythonPath": "/usr/bin/python3"
 }
