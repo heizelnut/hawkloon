@@ -17,9 +17,9 @@ dependencies = [line for line in requirements
     if not line.startswith("//") or line != ""]
 
 setup(
-    name="hawklooon",
+    name="hawkloon",
     version="0.1.0",
-    description="Framework to build synchronous workers.",
+    description="Python framework to build synchronous workers.",
     long_description=get_file_conts("../README.md"),
     long_description_content_type="text/markdown",
     url="https://github.com/heizelnut/hawkloon",
