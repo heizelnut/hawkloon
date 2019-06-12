@@ -61,7 +61,7 @@ class Worker(Logger):
                 - Done: the Job is done (code: 0);
             """
 
-            # If the job doesn't exist yet, his value is set 
+            # If the job doesn't exist yet, its value is set 
             #  to -2 (untouched). 
             if self.redis.get(hashed) is None:
                 self.log("Registered state for"
