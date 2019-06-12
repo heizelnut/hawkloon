@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="assets/logo.png" width=350>
+    <img src="assets/logo.svg">
 </p>
 
 **Hawkloon** (/'hɔːkluːn/) is a framework to build synchronous workers running on scalable infrastructures.
