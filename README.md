@@ -2,7 +2,7 @@
     <img id="logo" src="assets/logo.svg">
     <div id="shields" align="center">
         <img id="license" src="https://img.shields.io/github/license/heizelnut/hawkloon.svg">
-        <img id="code-size" src=""><img id="license" src="https://img.shields.io/github/languages/code-size/heizelnut/hawkloon.svg?color=success&label=size">
+        <img id="code-size" src="https://img.shields.io/github/languages/code-size/heizelnut/hawkloon.svg?color=success&label=size">
         <img id="bruh-moments" src="https://img.shields.io/github/search/heizelnut/hawkloon/BRUH%20moment.svg?label=BRUH%20moments"> 
     </div>
 </p>
