@@ -1,8 +1,0 @@
-$config:
-  py: "python3"
-
-default:
-  - goto: install
-
-install:
-  - cd ./src && $K(py); setup.py install
