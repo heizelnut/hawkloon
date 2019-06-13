@@ -1,8 +1,13 @@
-<p align="center">
-    <img src="assets/logo.svg">
+<p id="header" align="center">
+    <img id="logo" src="assets/logo.svg">
+    <div id="shields" align="center">
+        <img id="license" src="https://img.shields.io/github/license/heizelnut/hawkloon.svg">
+        <img id="code-size" src=""><img id="license" src="https://img.shields.io/github/languages/code-size/heizelnut/hawkloon.svg?color=success&label=size">
+        <img id="bruh-moments" src="https://img.shields.io/github/search/heizelnut/hawkloon/BRUH%20moment.svg?label=BRUH%20moments"> 
+    </div>
 </p>
 
-**Hawkloon** (/'hɔːkluːn/) is a framework to build synchronous workers running on scalable infrastructures.
+**Hawkloon** (/'hɔːkluːn/) is a Python framework to build synchronous workers running on scalable infrastructures.
 
 ### How it works
 To understand how it works, you should understand the concepts of _Worker_ and _Job_ first.
@@ -18,7 +23,15 @@ A Job is a resource, a piece of data given to the Worker. This is the homework I
  - A Worker can split the tasks between some threads.
  - When a Job ends, the thread tells to the others, so they can skip it.
 
-Hawkloon uses **Redis** ([website](https://redis.io)) to keep track of the jobs' states between threads & workers (so you can start a worker on two different machines).
+Hawkloon uses **Redis** ([website][redis]) to keep track of the jobs' states between threads & workers (so you can start a worker on two different machines).
+
+## Installation
+To install it, clone the repo and use the `setup.py` file.
+```bash
+git clone https://github.com/heizelnut/hawkloon
+cd hawkloon/src
+python3 setup.py install
+```
 
 ## Example
 Let's write a dead simple program that downloads cat images from the internet.
@@ -104,3 +117,9 @@ worker.connect("redis://localhost:6379/0") # Connect it to the redis server
  
 worker.consume() # Start working on it...
 ```
+
+## Contributing
+If you'd like to contribute, you're free to do so! Fork my project and then pull request me.
+
+<!-- MD Links -->
+[redis]: https://redis.io
