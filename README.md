@@ -1,5 +1,5 @@
 <p id="header" align="center">
-    <img id="logo" src="assets/logo.svg">
+    <img id="logo" src="https://github.com/heizelnut/hawkloon/blob/master/assets/logo.svg">
     <div id="shields" align="center">
         <img id="license" src="https://img.shields.io/github/license/heizelnut/hawkloon.svg">
         <img id="code-size" src="https://img.shields.io/github/languages/code-size/heizelnut/hawkloon.svg?color=success&label=size">
