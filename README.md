@@ -66,7 +66,7 @@ class CatWorker(Worker):
     THREADS = 3
     
     # Requests the image and saves it in binary form
-    def run(self, job):
+    def consume(self, job):
         img = requests.get(job, allow_redirects=True).content
 
         with open(f"{random.randint(0, 10000)}.jpg", "wb") as f:
@@ -84,7 +84,7 @@ worker.connect("redis://localhost:6379")
 After that, start it!
 
 ```python
-worker.consume()
+worker.start()
 ```
 
 At the end, it should look something like this:
@@ -105,7 +105,7 @@ class CatWorker(Worker): # Make your own worker
     THREADS = 4 # Default is 2
     
     # Requests the image and saves it in binary form
-    def run(self, job):
+    def consume(self, job):
         img = requests.get(job, allow_redirects=True).content
 
         with open(f"{random.randint(0, 10000)}.jpg", "wb") as f:
@@ -115,7 +115,7 @@ worker = CatWorker(jobs) # Instantiate the Worker
 
 worker.connect("redis://localhost:6379/0") # Connect it to the redis server
  
-worker.consume() # Start working on it...
+worker.start() # Start working on it...
 ```
 
 ## Contributing
