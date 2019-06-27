@@ -18,7 +18,7 @@ dependencies = [line for line in requirements
 
 setup(
     name="hawkloon",
-    version="0.1.0",
+    version="0.2.0",
     description="Python framework to build synchronous workers.",
     long_description=get_file_conts("../README.md"),
     long_description_content_type="text/markdown",

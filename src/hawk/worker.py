@@ -6,22 +6,30 @@
 from base64 import b64encode
 from hashlib import sha224
 from redis import Redis
+from redis.exceptions import ConnectionError
 from threading import Thread
+from multiprocessing import Process
 import time
 
-from .logger import Logger
+from .logger import LoggerMixin
 
-class Worker(Logger):
+class Worker(Process, LoggerMixin):
     THREADS = 2
 
-    def __init__(self, jobs):
+    def __init__(self, jobs, logging=True):
+        # Initialize the 'Process' superclass
+        super().__init__()
+
         self.jobs = jobs
+
+        # Enables logging
+        self.logging = logging
 
         # At startup, the worker isn't connected to anything.
         self.connected = False
         
-        # Declare a threads list - becomes handy later.
-        self.threads = {}
+        # Declare a threads list
+        self.threads = []
 
         # Log the name of the worker
         self.log(f"{self.__class__.__name__} initialized.")
@@ -74,24 +82,11 @@ class Worker(Logger):
             if int(self.redis.get(hashed)) == -2:
                 self.redis.incr(hashed)
                 self.log(f"Doing {hashed[:6]}...{hashed[-6:]}")
-                self.run(job)
+                self.consume(job)
                 self.redis.incr(hashed)
                 self.log(f"{hashed[:6]}...{hashed[-6:]} done.")
-        
-        # Tell the worker to delete this thread.
-        self.thread_finished(name)
-    
-    def thread_finished(self, name):
-        # Delete a thread in the threads list with the given name
-        del self.threads[name]
 
-        # If the threads list is empty, it means that all threads
-        #  finished working, so the worker can clear the Redis DB 
-        #  and poorly die.
-        if self.threads == {}:
-            self.clear()
-
-    def consume(self):
+    def run(self):
         # Check if the worker is connected before consuming the jobs.
         if not self.connected:
             self.fail("You should be connected to a Redis server first.")
@@ -113,11 +108,22 @@ class Worker(Logger):
             )
             
             # Start the thread and add it to the threads list with its name.
-            self.threads[name] = thread
+            self.threads.append(thread)
             thread.start()
 
             # WTF/BRUH moment: leave it as it is.
             time.sleep(.1)
+        
+        try:
+            for thread in self.threads:
+                thread.join()
+        except KeyboardInterrupt:
+            self.log("Interrupted, shutting down...")
+            self.clear()
+            self.fail("Worker killed succesfully.")
+        
+        # Clear the DB after all threads finished.
+        self.clear()
 
     def clear(self):
         # Cannot clear if the worker isn't connected to Redis.
@@ -129,5 +135,5 @@ class Worker(Logger):
         self.redis.flushdb()
 
     # This method should be overwritten from the subclass.
-    def run(self, job):
+    def consume(self, job):
         pass

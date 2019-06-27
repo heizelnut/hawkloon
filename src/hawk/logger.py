@@ -5,14 +5,16 @@
 
 import sys
 
-class Logger:
+class LoggerMixin:
     def log(self, message):
         # Writes a message to STDOUT.
-        print(f" * {message}", flush=True)
+        if self.logging:
+            print(f" * {message}", flush=True)
     
     def warn(self, message):
         # Writes a message to STDERR.
-        print(f" ! {message}", file=sys.stderr, flush=True)
+        if self.logging:
+            print(f" ! {message}", file=sys.stderr, flush=True)
     
     def fail(self, message):
         # Creates a warning (to STDERR) and exits 
