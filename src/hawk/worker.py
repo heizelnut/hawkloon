@@ -137,3 +137,15 @@ class Worker(Process, LoggerMixin):
     # This method should be overwritten from the subclass.
     def consume(self, job):
         pass
+
+    # This method is used with decorator-style declared workers
+    def __call__(self, threads=2):
+        self.THREADS = threads
+
+        def wrapper(func):
+            self.log("Registering the function...")
+            self.consume = func
+
+            return func
+        
+        return wrapper

@@ -1,5 +1,5 @@
 <p id="header" align="center">
-    <img id="logo" src="https://github.com/heizelnut/hawkloon/blob/master/assets/logo.svg">
+    <img id="logo" src="https://raw.githubusercontent.com/heizelnut/hawkloon/master/assets/logo.svg" alt="Hawkloon Logo">
     <div id="shields" align="center">
         <img id="license" src="https://img.shields.io/github/license/heizelnut/hawkloon.svg">
         <img id="code-size" src="https://img.shields.io/github/languages/code-size/heizelnut/hawkloon.svg?color=success&label=size">
@@ -47,7 +47,11 @@ jobs = (
 )
 ```
 
-Then, declare the worker and choose the number of threads.
+Now you can choose two ways to declare workers: with [Class Inheritance](#class-inheritance) or [Decorators](#decorator-style).
+
+### Class Inheritance
+
+Inherit from the `Worker` class and choose the number of threads.
 ```python
 from hawk import Worker
 
@@ -56,7 +60,7 @@ class CatWorker(Worker):
     pass
 ```
 
-Alright, now overwrite the `Worker.run` method by adding the ability to actually download some images.
+Alright, now overwrite the `Worker.consume` method by adding the ability to actually download some images.
 
 ```python
 from hawk import Worker
@@ -87,35 +91,35 @@ After that, start it!
 worker.start()
 ```
 
-At the end, it should look something like this:
+### Decorator Style
+
+Import the `Worker` class and instantiate it.
 
 ```python
-import requests, random
-from hawk import Worker # Import the Worker class
+from hawk import Worker
 
-jobs = (
-    "https://i.imgur.com/uvFEcJN.jpg",
-    "https://i.imgur.com/6qL2HSN.jpg",
-    "https://i.imgur.com/dRxnay8.jpg",
-    "https://i.imgur.com/aAuTHLe.jpg",
-    "https://i.imgur.com/SpCbHBI.jpg"
-)
+cat_worker = Worker(jobs)
+```
 
-class CatWorker(Worker): # Make your own worker
-    THREADS = 4 # Default is 2
-    
-    # Requests the image and saves it in binary form
-    def consume(self, job):
-        img = requests.get(job, allow_redirects=True).content
+Then, create a function that downloads cat images, and decorate it with the new instantiated object passing the amount of threads to use.
 
-        with open(f"{random.randint(0, 10000)}.jpg", "wb") as f:
-            f.write(img)
+```python
+@cat_worker(threads=3)
+def download(job):
+    img = requests.get(job, allow_redirects=True).content
 
-worker = CatWorker(jobs) # Instantiate the Worker
+    with open(f"{random.randint(0, 10000)}.jpg", "wb") as f:
+        f.write(img)
+```
 
-worker.connect("redis://localhost:6379/0") # Connect it to the redis server
- 
-worker.start() # Start working on it...
+> The decorator function must have only one argument.
+
+After that, connect and start crunching data.
+
+```python
+worker.connect("redis://localhost:6379")
+
+worker.start()
 ```
 
 ## Contributing
