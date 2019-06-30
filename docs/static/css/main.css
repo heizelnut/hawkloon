@@ -1,0 +1,62 @@
+@font-face {
+    font-family: "Sawasdee";
+    src: url("../fonts/Sawasdee.ttf");
+}
+
+html, body {
+    padding: 0em;
+    margin: 0em;
+    display: table;
+    height: 100%;
+    width: 100%;
+    background-color: #272727;
+    color: #FAFAFA;
+    align-content: center;
+    font-family: Sawasdee;
+    scroll-behavior: smooth;
+}
+
+main {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0em;
+    margin: 0em;
+    font-size: 1em;
+}
+
+img.btn {
+    width: 2.5em;
+    opacity: 0.75;
+    transition: opacity 0.3s ease-in-out;
+}
+
+img.btn:hover {
+    opacity: 1;
+}
+
+a {
+    margin: 1em;
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+}
+
+h1 {
+    margin: 0.4em 0em 0.3em;
+    font-size: 2.5em;
+}
+
+p {
+    margin: 0em;
+    font-size: 1.5em;
+}
+
+@media screen and (min-width: 645px) {
+    main { font-size: 1.5em; }
+}
+
+@media screen and (min-width: 1300px) {
+    main { font-size: 2em; }
+    img#logo { width: 10em; }
+}
