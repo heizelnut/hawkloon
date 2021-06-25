@@ -1,4 +1,4 @@
-# Copyright (c) 2019 Heizelnut (Emanuele Lillo)
+# Copyright (c) 2019 Heizelnut
 # 
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
