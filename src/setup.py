@@ -24,7 +24,6 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/heizelnut/hawkloon",
     author="Heizelnut",
-    author_email="emalillo270304@gmail.com",
     license="MIT",
     packages=["hawk"],
     install_requires=dependencies,
